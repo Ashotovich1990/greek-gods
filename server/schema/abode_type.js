@@ -14,7 +14,9 @@ const AbodeType = new GraphQLObjectType({
         gods: {
             type: new GraphQLList(require('./god_type')),
             resolve(parentValue) {
-                return AbodeType.findById(parentValue.id).populate('gods');
+                return Abode.findById(parentValue.id)
+                    .populate('gods')
+                    .then(abode => abode.gods)
             }
         }
     })

@@ -13,7 +13,9 @@ const EmblemType = new GraphQLObjectType({
         gods: {
             type: new GraphQLList(require('./god_type')),
             resolve(parentValue) {
-                return EmblemType.findById(parentValue.id).populate('gods');
+                return Emblem.findById(parentValue.id)
+                    .populate('gods')
+                    .then(emblem => emblem.gods)
             }
         }
     })
