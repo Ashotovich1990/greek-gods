@@ -65,7 +65,7 @@ const GodType = new GraphQLObjectType({
         children: {
             type: new GraphQLList(GodType),
             resolve(parentValue) {
-                return God.findRelatives(parentValue.id, 'children');
+                return findRelatives(God, parentValue.id, 'children');
             }
         }
     })
