@@ -71,6 +71,18 @@ const mutation = new GraphQLObjectType({
             }
         },
 
+        removeGodRelative: {
+            type: GodType,
+            args: {
+                godId: { type: GraphQLID },
+                relativeId: { type: GraphQLID}, 
+                relationship: {type: GraphQLString }
+            },
+            resolve(parentValue, { godId, relativeId, relationship}) {
+                return God.removeRelative(godId, relativeId, relationship);
+            }
+        }
+
 
     }
 });
