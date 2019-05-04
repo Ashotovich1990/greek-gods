@@ -6,6 +6,7 @@ const { GraphQLObjectType,
 const mongoose = require('mongoose');
 const God = mongoose.model('god');
 const GodType = require('./god_type');
+const AbodeType = require('./abode_type');
 
 const mutation = new GraphQLObjectType({
     name: 'Mutation',
@@ -137,6 +138,27 @@ const mutation = new GraphQLObjectType({
                 return God.removeDomain(godId, domain);
             }
         },
+
+        newAbode: {
+            type: AbodeType,
+            args: {
+                name: {type: GraphQLString},
+                coordinates: {type: GraphQLString}
+            },
+            resolve(parentValue, {name, coordinates}) {
+                return new Abode({name, coordinates}).save().then(abode => abode);
+            }
+        }, 
+
+        deleteAbode: {
+            type: AbodeType,
+            args: {
+                abodeId: { type: GraphQLID}
+            },
+            resolve(parentValue, {abodeId}) {
+                return Abode.deleteOne({'_id': abodeId}).then(abode => abode);
+            }
+        }
 
 
     }
