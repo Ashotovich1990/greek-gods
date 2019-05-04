@@ -108,8 +108,33 @@ GodSchema.statics.removeRelative = (godId, relativeId, relationship) => {
     //     removeGodRelative( godId: $godId, relativeId: $relativeId, relationship: $relationship) {
     //       name
     //     }
+    //   }  
+}; 
+
+GodSchema.statics.addEmblem = (godId, emblemId) => {
+    return God.findById(godId)
+    .then(god => {
+        god.emblems.push(emblemId);
+        return god.save().then(god => god);
+    });
+
+    // mutation($godId: ID, $emblemId:ID) {
+    //     addGodEmblem(godId: $godId, emblemId: $emblemId) {
+    //       name,
+    //       emblems {
+    //         name
+    //       }
+    //     }
     //   }
-      
+}; 
+
+GodSchema.statics.removeEmblem = (godId, emblemId) => {
+    return God.findById(godId)
+    .then(god => {
+        god.emblems.pull(emblemId);
+        return god.save().then(god => god);
+    });
 }
+
 
 module.exports = God = mongoose.model('god', GodSchema);
