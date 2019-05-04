@@ -103,7 +103,40 @@ const mutation = new GraphQLObjectType({
             resolve(parentValue, { godId, emblemId}) {
                 return God.removeEmblem(godId, emblemId);
             }
-        }
+        },
+
+        updateGodAbode: {
+            type: GodType,
+            args: {
+                godId: { type: GraphQLID},
+                abodeId: { type: GraphQLID}
+            },
+            resolve(parentValue, { godId, abodeId}) {
+                return God.updateAbode(godId, abodeId);
+            }
+        },
+
+        addGodDomain: {
+            type: GodType,
+            args: {
+                godId: { type: GraphQLID },
+                domain: { type: GraphQLString}
+            },
+            resolve(parentValue, {godId, domain}) {
+                return God.addDomain(godId, domain);
+            }
+        }, 
+
+        removeGodDomain: {
+            type: GodType,
+            args: {
+                godId: { type: GraphQLID },
+                domain: { type: GraphQLString}
+            },
+            resolve(parentValue, {godId, domain}) {
+                return God.removeDomain(godId, domain);
+            }
+        },
 
 
     }
