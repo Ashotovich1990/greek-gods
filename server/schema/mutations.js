@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const God = mongoose.model('god');
 const GodType = require('./god_type');
 const AbodeType = require('./abode_type');
+const EmblemType = require('./emblem_type');
 
 const mutation = new GraphQLObjectType({
     name: 'Mutation',
@@ -157,6 +158,62 @@ const mutation = new GraphQLObjectType({
             },
             resolve(parentValue, {abodeId}) {
                 return Abode.deleteOne({'_id': abodeId}).then(abode => abode);
+            }
+        }, 
+
+        updateAbode: {
+            type: AbodeType,
+            args: {
+                abodeId: { type: GraphQLID},
+                name: {type: GraphQLString},
+                coordinates: { type: GraphQLString}
+            },
+
+            resolve(parentValue, { abodeId, name, coordinates}) {
+                let newObject = {}; 
+                newObject.id = abodeId;
+                if (name) newObject.name = name; 
+                if (coordinates) newObject.coordinates = coordinates; 
+
+                return Abode.findOneAndUpdate({'_id': abodeId}, { $set: newObject }, { new: true })
+                .then(abode => abode);
+            }
+        },
+
+        newEmblem: {
+            type: EmblemType,
+            args: {
+                name: { type: GraphQLString}
+            },
+            resolve(parentValue, { name}) {
+                return new Emblem({name}).save().then(emblem => emblem);
+            }
+        }, 
+
+        deleteEmblem: {
+            type: EmblemType,
+            args: {
+                emblemId: { type: GraphQLID}
+            },
+            resolve(parentValue, {emblemId}) {
+                return Emblem.deleteOne({'_id': emblemId}).then(emblem => emblem)
+            }
+        }, 
+
+        updateEmblem: {
+            type: EmblemType,
+            args: {
+                emblemId: { type: GraphQLID}, 
+                name: { type: GraphQLString}
+            },
+            resolve(parentValue, { emblemId, name}) {
+                let newObject = {};
+
+                newObject.id = emblemId;
+                if (name) newObject.name = name; 
+                
+                return Emblem.findOneAndUpdate({'_id': emblemId}, { $set: newObject }, { new: true })
+                .then(emblem => emblem);
             }
         }
 
