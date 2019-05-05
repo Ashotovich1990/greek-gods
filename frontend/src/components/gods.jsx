@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import God from './gods';
+import God from './god';
 import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -31,7 +31,7 @@ class Gods extends React.Component {
 
                 return (
                     <div>
-                        <ul>{ data.gods.map(el => <li>{el.name}</li>) }</ul>
+                        <ul>{ data.gods.map(god => <li><God content={god}/></li>) }</ul>
                     </div>
                 );
             }}
