@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import God from './god';
+import GodSidebar from './god_sidebar';
 import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -8,18 +9,18 @@ query {
     gods {
         id,
         name,
-        type,
-        description,
-        domains,
-        abode {
-            id
-        }
     } 
 }`;
 
 class Gods extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {godId: {}}; 
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        this.setState( { godId: {'id': e.currentTarget.attributes.value.value}})
     }
 
     render() {
@@ -31,7 +32,12 @@ class Gods extends React.Component {
 
                 return (
                     <div>
-                        <ul>{ data.gods.map(god => <li><God content={god}/></li>) }</ul>
+                        <ul>
+                            { data.gods.map(god => 
+                                <li onClick={this.handleClick} key={god.id} value={god.id}><God content={god}/></li>
+                            )}
+                        </ul>
+                        <GodSidebar godId={this.state.godId}/>
                     </div>
                 );
             }}

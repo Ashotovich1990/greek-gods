@@ -42,7 +42,7 @@ class God extends React.Component {
             <div onMouseEnter={this.handleMouse}
                  onMouseLeave={this.handleMouse}
             >
-                {this.content()}
+                {this.introContent()}
             </div>
         )
     }
