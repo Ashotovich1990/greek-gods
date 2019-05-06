@@ -8,7 +8,7 @@ class God extends React.Component {
     introContent() {
         return (
             <div>
-                <li>{this.props.content.name}</li>
+                {this.props.content.name}
             </div>
         )
     }

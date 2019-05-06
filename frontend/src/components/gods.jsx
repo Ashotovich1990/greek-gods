@@ -31,8 +31,8 @@ class Gods extends React.Component {
                 if (error) return <h1>error</h1>
 
                 return (
-                    <div>
-                        <ul>
+                    <div className="god-container">
+                        <ul className="god-list">
                             { data.gods.map(god => 
                                 <li onClick={this.handleClick} key={god.id} value={god.id}><God content={god}/></li>
                             )}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'; 
 import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Abode from './abode';
+import Emblem from './emblem';
 
 const GET_GOD = gql` 
     query God($id: ID!) {
@@ -9,6 +11,15 @@ const GET_GOD = gql`
             name,
             type,
             description,
+            abode {
+                id,
+                name
+            }, 
+            emblems {
+                id,
+                name
+            }
+
         }
     }
 `;
@@ -28,11 +39,11 @@ class GodSidebar extends React.Component {
 
                 return (
                     <div>
-                        <ul>
-                        <li>{data.god.name}</li>
-                        <li>{data.god.type}</li>
-                        <li>{data.god.description}</li>
-                        </ul>
+                        <div>{data.god.name}</div>
+                        <div>{data.god.type}</div>
+                        <div>{data.god.description}</div>
+                       <Abode abode={data.god.abode}/>
+                       <Emblem emblems={data.god.emblems} />
                     </div>
                 );
             }}
