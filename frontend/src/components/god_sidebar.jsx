@@ -3,6 +3,9 @@ import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Abode from './abode';
 import Emblem from './emblem';
+import Relatives from './relatives';
+import Loading from './loading';
+import Error from './error';
 
 const GET_GOD = gql` 
     query God($id: ID!) {
@@ -18,6 +21,20 @@ const GET_GOD = gql`
             emblems {
                 id,
                 name
+            },
+            siblings {
+                id, 
+                name
+            },
+
+            parents {
+                id,
+                name
+            }, 
+
+            children {
+                id,
+                name
             }
 
         }
@@ -27,23 +44,37 @@ const GET_GOD = gql`
 class GodSidebar extends React.Component {
     constructor(props) {
         super(props);
-    }
+    };
 
+    godInfo(god) {
+        return (
+            <div className="god-info">
+                <div className="god-title">{god.name}</div>
+                <div className="god-type-abode">
+                    <Abode abode={god.abode}/>
+                    <div className="god-type">Type: {god.type}</div>
+                </div>
+                <div className="god-description">{god.description}</div>
+            </div>
+        );
+    };
 
     render() {
         return (
         <Query query={GET_GOD} variables={ this.props.godId }>
             {({ loading, error, data }) => {
-                if (loading)  return <h1>loading</h1>
-                if (error) return <h1>error</h1>
+                if (loading)  return <Loading />;
+                if (error) return <Error error={error} />;
 
                 return (
-                    <div>
-                        <div>{data.god.name}</div>
-                        <div>{data.god.type}</div>
-                        <div>{data.god.description}</div>
-                       <Abode abode={data.god.abode}/>
+                    <div className="god-sidebar">
+                        {this.godInfo(data.god)}
                        <Emblem emblems={data.god.emblems} />
+                       <div className="relatives">
+                            <Relatives relationship="Siblings" relatives={data.god.siblings}/>
+                            <Relatives relationship="Parents" relatives={data.god.parents}/>
+                            <Relatives relationship="Children" relatives={data.god.children}/>
+                       </div>
                     </div>
                 );
             }}

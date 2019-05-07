@@ -3,6 +3,7 @@ import God from './god';
 import GodSidebar from './god_sidebar';
 import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Error from './error';
 
 const GET_GODS = gql` 
 query {
@@ -15,7 +16,7 @@ query {
 class Gods extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {godId: {}}; 
+        this.state = {godId: {"id": "5c98e94dd5a3ca0de10a1501"}}; 
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -27,8 +28,8 @@ class Gods extends React.Component {
         return (
             <Query query={GET_GODS} >   
             {({ loading, error, data }) => {
-                if (loading) return <h1>loading</h1>
-                if (error) return <h1>error</h1>
+                if (loading) return <h1>Loading</h1>
+                if (error) return <Error error={error}/>
 
                 return (
                     <div className="god-container">

@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-image: url('./greek_gods_back.jpg');
+  background-size: contain;
 }
 
 .App-logo {
@@ -23,12 +25,74 @@
   color: #61dafb;
 }
 
+.loading {
+
+}
+
 .god-container {
+  font-family: cursive;
+  color: white;
   display: flex;
+  height: 100%;
+  background-color: rgba(0,0,0,.4);
 }
 
 .god-list {
+  font-size: 200%;
+  font-weight: 900;
   list-style: none;
+}
+
+.relative-list {
+    font-size: 180%;
+    font-weight: 700;
+    list-style: none;
+}
+
+.emblem-list {
+  font-size: 180%;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.god-sidebar {
+  margin: 5%;
+  margin-right: 10%;
+}
+.relatives {
+  display: flex;
+  justify-content: space-between;
+}
+
+.god-type {
+ 
+}
+
+.abode {
+
+}
+
+.god-type-abode {
+  display: flex;
+  font-size: 180%;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+.god-description {
+  font-size: 150%;
+  font-weight: 400;
+}
+
+.god-title {
+  font-size: 400%;
+  font-weight: 900;
+};
+
+.relative-type {
+  font-size: 200%;
 }
 
 @keyframes App-logo-spin {

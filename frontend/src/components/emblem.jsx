@@ -8,7 +8,7 @@ class Emblem extends React.Component {
     render() {
         return (
         <ul className="emblem-list">
-            {this.props.emblems.map(emblem => <li>{emblem.name}</li>)}
+            Emblems: {this.props.emblems.map(emblem => <li key={emblem.id}>{emblem.name}</li>)}
         </ul>
     )
     }

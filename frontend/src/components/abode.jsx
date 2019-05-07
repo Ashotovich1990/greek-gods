@@ -7,8 +7,8 @@ class Abode extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.props.abode.name}
+            <div className="adobe">
+                Abode: {this.props.abode ? this.props.abode.name : ""}
             </div>
         )
     }
