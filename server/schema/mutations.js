@@ -21,6 +21,7 @@ const mutation = new GraphQLObjectType({
                 description: { type: GraphQLString }
             },
             resolve(parentValue, { name, type, generation, description }) {
+                debugger
                 return ( new God({ name, type, generation, description })).save();
             }
         }, 

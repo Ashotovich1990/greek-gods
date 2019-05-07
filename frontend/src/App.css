@@ -95,6 +95,47 @@
   font-size: 200%;
 }
 
+.create-god-button {
+  background-color: antiquewhite;
+  border-radius: 16px;
+  font-size: 25px;
+  color: black;
+  font-family: cursive;
+  font-weight: 900;
+  padding: 10px;
+}
+
+.add-new-god {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-god-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-god-form > input, textarea {
+  background-color: antiquewhite;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.new-god-form > label > textarea {
+  min-height: 300px;
+}
+
+.new-god-form > label > input {
+  background-color: antiquewhite;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

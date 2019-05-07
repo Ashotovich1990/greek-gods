@@ -4,6 +4,7 @@ import GodSidebar from './god_sidebar';
 import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Error from './error';
+import AddGod from './create_god';
 
 const GET_GODS = gql` 
 query {
@@ -37,6 +38,7 @@ class Gods extends React.Component {
                             { data.gods.map(god => 
                                 <li onClick={this.handleClick} key={god.id} value={god.id}><God content={god}/></li>
                             )}
+                        <AddGod/>
                         </ul>
                         <GodSidebar godId={this.state.godId}/>
                     </div>
