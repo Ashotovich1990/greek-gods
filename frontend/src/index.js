@@ -5,8 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
+
+const cache = new InMemoryCache();
 const client = new ApolloClient({
+    cache,
     uri: "http://localhost:5000/graphql",
     onError: ({ networkError, graphQLErrors }) => {
       console.log('graphQLErrors', graphQLErrors)

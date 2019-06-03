@@ -7,6 +7,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "apollo-boost": "^0.3.1",
+    "apollo-cache-inmemory": "^1.6.0",
     "babel-loader": "^8.0.5",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",

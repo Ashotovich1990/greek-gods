@@ -59,27 +59,34 @@ class GodSidebar extends React.Component {
         );
     };
 
-    render() {
-        return (
-        <Query query={GET_GOD} variables={ this.props.godId }>
-            {({ loading, error, data }) => {
-                if (loading)  return <Loading />;
-                if (error) return <Error error={error} />;
-
-                return (
-                    <div className="god-sidebar">
-                        {this.godInfo(data.god)}
-                       <Emblem emblems={data.god.emblems} />
-                       <div className="relatives">
-                            <Relatives relationship="Siblings" relatives={data.god.siblings}/>
-                            <Relatives relationship="Parents" relatives={data.god.parents}/>
-                            <Relatives relationship="Children" relatives={data.god.children}/>
-                       </div>
+    content(data) {
+        if (data.god) {
+            return (
+                <div className="god-sidebar">
+                    {this.godInfo(data.god)}
+                    <Emblem emblems={data.god.emblems} />
+                    <div className="relatives">
+                        <Relatives relationship="Siblings" relatives={data.god.siblings}/>
+                        <Relatives relationship="Parents" relatives={data.god.parents}/>
+                        <Relatives relationship="Children" relatives={data.god.children}/>
                     </div>
-                );
-            }}
-        </Query>
-        );
+                </div>
+            );
+        } else {
+            return <div>Removed</div>
+        }
+    }
+
+    render() {
+            return (
+            <Query query={GET_GOD} variables={ this.props.godId }>
+                {({ loading, error, data }) => {
+                    if (loading)  return <Loading />;
+                    if (error) return <Error error={error} />;
+
+                    return this.content(data);
+                }}
+            </Query>);
     }
 }; 
 

@@ -14,7 +14,7 @@ const DeleteGod = (props) => {
     return (
         <Mutation mutation={DELETE_GOD}>
         {(deleteGod, {date}) => (
-            <div>{deleteGod({variables: {id: props.godId} })}</div>
+            <div onClick={()=> deleteGod({variables: {id: props.godId} })}>Remove?</div>
         )}
         </Mutation>
     )
